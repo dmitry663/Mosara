@@ -4,7 +4,7 @@ import os
 import threading 
 
 app = None
-domain = "dmiry.shop"
+Domain  = "dmiry.shop"
 SSL = False
 SSL_CERTFILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../ssl/certificate.crt")
 SSL_KEYFILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../ssl/private.key")
@@ -27,13 +27,13 @@ def before_request():
             return redirect(url, code=code)
 
 def run_http():
-    app.run(host='0.0.0.0', port=HTTP_PORT)
+    app.run(host='0.0.0.0', port=HTTP_PORT, debug = not SSL)
 
 def run_https():
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     ssl_context.load_cert_chain(certfile=SSL_CERTFILE, keyfile=SSL_KEYFILE)
     
-    app.run(host='0.0.0.0', port=HTTPS_PORT, ssl_context=ssl_context)
+    app.run(host='0.0.0.0', port=HTTPS_PORT, ssl_context=ssl_context, debug = SSL)
 
 @app.route('/')
 def hello():
@@ -69,11 +69,6 @@ class APP:
             run_https()
         else:
             run_http()
-
-        exit(0)
-      
-        
-
 
 
     
