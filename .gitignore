@@ -1,2 +1,5 @@
 myvenv/
+myenv/
+temp/
+test/
 __pycache__/
