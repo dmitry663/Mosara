@@ -13,6 +13,12 @@
             "args": []
         },
         {
+            "name": "server_router",
+            "executable": "python",
+            "path": "program_files/server_router/app.py",
+            "args": []
+        },
+        {
             "name": "hello_world",
             "executable": "python",
             "path": "program_files/hello_world/app.py",
