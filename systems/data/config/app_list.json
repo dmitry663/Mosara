@@ -1,9 +1,15 @@
 {
     "apps": [
         {
-            "name": "hello_world",
+            "name": "https_redirection",
             "executable": "python",
-            "path": "program_files/hello_world/app.py",
+            "path": "program_files/https_redirection/app.py",
+            "args": []
+        },
+        {
+            "name": "https_proxy",
+            "executable": "python",
+            "path": "program_files/https_proxy/app.py",
             "args": []
         },
         {
