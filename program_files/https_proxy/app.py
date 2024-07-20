@@ -5,8 +5,8 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/', defaults={'path': ''}, methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"])
+@app.route('/<path:path>', methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"])
 def proxy(path):
     # 원본 서버 URL
     target_url = f"http://127.0.0.1:5000/{path}"
@@ -15,7 +15,7 @@ def proxy(path):
     resp = requests.request(
         method=request.method,
         url=target_url,
-        headers={key: value for key, value in request.headers if key != 'Host'},
+        headers={key: value for key, value in request.headers.items() if key.lower() != 'host'},
         params=request.args,
         data=request.get_data(),
         cookies=request.cookies,
