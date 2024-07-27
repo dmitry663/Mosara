@@ -37,7 +37,7 @@ python3 -m venv Mosara/venv
 Mosara\venv\Scripts\activate
 
 #
-pip install -r Mosara\systems\data\python\requirements.txt
+pip install -r Mosara/systems/data/python/requirements.txt
 
 # 가상 환경 비활성화
 deactivate
@@ -48,7 +48,7 @@ deactivate
 source Mosara/venv/bin/activate
 
 # 
-pip install -r Mosara\systems\data\python\requirements.txt
+pip install -r Mosara/systems/data/python/requirements.txt
 
 # 가상 환경 비활성화
 deactivate
