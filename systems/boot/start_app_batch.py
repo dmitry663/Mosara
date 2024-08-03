@@ -1,7 +1,14 @@
-import json
-import subprocess
+# systems/boot/start_app_batch.py
+import os
+import sys
 from pathlib import Path
-import threading
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../program_files/utilities/execution'))
+
+sys.path.append(project_root)
+
+from execution import Command
+from utils import read_json_file, DotDict
 
 # 홈 디렉토리 설정
 home_dir = Path(__file__).resolve().parent.parent.parent
@@ -31,49 +38,14 @@ def is_home_exists(file_path):
         return False
     return True
 
-def read_json_file(file_path):
-    """JSON 파일을 읽어 딕셔너리로 반환하는 함수"""
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            return json.load(file)
-    except FileNotFoundError:
-        print(f"File not found: {file_path}")
-    except json.JSONDecodeError as e:
-        print(f"Error decoding JSON from the file {file_path}: {e}")
-    return None
-
 class AppEntity:
     def __init__(self, app_data):
-        try:
-            self.name = app_data['name']
-        except KeyError as e:
-            self.name = None
-
-        try:
-            self.executable = app_data['executable']
-            self.path = home_dir / Path(app_data['path'])
-            
-            if not is_home_exists(self.path):
-                print(f"파일({self.path})이 존재하지 않습니다.")
-                raise Exception(f"파일({self.path})이 존재하지 않습니다.")
-
-            self.command = f"{self.executable} {self.path}"
-            print(self.command)
-
-        except KeyError as e:
-            print(f"앱 데이터{self.name}에 키워드 '{e.args[0]}'가 없습니다.")
-            raise Exception(f"앱 데이터{self.name}에 키워드 '{e.args[0]}'가 없습니다.")
-
-        def subprocess_run():
-            subprocess.run(self.command, shell=True)
-        
-        self.thread = threading.Thread(target = subprocess_run) 
+        self.command = Command(DotDict(app_data))
 
     def run(self):
-        self.thread.start()
+        self.command.run_command_threading()
 
 def main():
-
     if not is_home_exists(config_file_path):
         return
 
@@ -91,11 +63,15 @@ def main():
     for app_data in apps:
         try:
             ape = AppEntity(app_data)
-            ape.run()
             app_list.append(ape)
         except Exception as e:
             print(e)
-            continue
+
+    for ape in app_list:
+        try:
+            ape.run()
+        except Exception as e:
+            print(e)
 
 if __name__ == "__main__":
     main()

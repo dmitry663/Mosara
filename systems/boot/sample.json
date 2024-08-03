@@ -1,0 +1,10 @@
+{
+    "apps": [
+        {
+            "name": "hello_world",
+            "executable": "python",
+            "args": ["program_files/hello_world/app.py"],
+            "super": true
+        }
+    ]
+}

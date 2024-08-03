@@ -3,26 +3,26 @@
         {
             "name": "https_redirection",
             "executable": "python",
-            "path": "program_files/https_redirection/app.py",
-            "args": []
+            "args": ["program_files/https_redirection/app.py"],
+            "super": true
         },
         {
             "name": "https_proxy",
             "executable": "python",
-            "path": "program_files/https_proxy/app.py",
-            "args": []
+            "args": ["program_files/https_proxy/app.py"],
+            "super": true
         },
         {
             "name": "server_router",
             "executable": "python",
-            "path": "program_files/server_router/app.py",
-            "args": []
+            "args": ["program_files/server_router/app.py"],
+            "super": false
         },
         {
             "name": "hello_world",
             "executable": "python",
-            "path": "program_files/hello_world/app.py",
-            "args": []
+            "args": ["program_files/hello_world/app.py"],
+            "super": false
         }
     ]
 }
