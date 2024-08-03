@@ -46,7 +46,7 @@ class Command:
             for arg in condition["args"]:
                 if arg["original_argument"] in self.command_list and arg["original_argument"] not in check_list:
                     check_list.append(arg["original_argument"])
-                    self.command_list = [arg["replacement_argument"] if arg["original_argument"] else argx == arg["original_argument"] for argx in self.command_list]
+                    self.command_list = [arg["replacement_argument"] if argx == arg["original_argument"] else argx for argx in self.command_list]
 
     def get_command(self):
         return self.command
