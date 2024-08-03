@@ -1,0 +1,14 @@
+{
+    "conditions": [
+        {
+            "no": 1,
+            "condition": ["super", "not windows"],
+            "args":[
+                {
+                "original_argument": "python",
+                "replacement_argument": "venv/bin/python"
+                }
+            ]
+        }
+    ]
+}

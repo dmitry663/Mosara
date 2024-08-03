@@ -4,7 +4,6 @@ import sys
 from pathlib import Path
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../program_files/utilities/execution'))
-
 sys.path.append(project_root)
 
 from execution import Command
@@ -59,10 +58,12 @@ def main():
         print(f"앱 데이터 리스트('{e.args[0]}')가 없습니다.")
         return
 
+    print("실행:")
     app_list = []
     for app_data in apps:
         try:
             ape = AppEntity(app_data)
+            print(ape.command.get_command())
             app_list.append(ape)
         except Exception as e:
             print(e)
